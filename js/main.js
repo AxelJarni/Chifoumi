@@ -16,10 +16,10 @@ function getUserName(){
         //fix used when i had a loop problem on the >20 condtion. Delete "if" and "else if" conditions, if you want to use.
             //userName = prompt("Calme toi, je veux juste un nom entre 2 et 20 caractères !");
         if (name.length < 2){
-        name = prompt("C'est pas un nom ça, c'est une lettre.\nConcentre toi, fais un effort.");
+            name = prompt("C'est pas un nom ça, c'est une lettre.\nConcentre toi, fais un effort.");
         }
         else if (name.length > 20){
-        name = prompt("Je t'ai demandé un nom, pas un roman !\nT'as pas un petit surnom ?");
+            name = prompt("Je t'ai demandé un nom, pas un roman !\nT'as pas un petit surnom ?");
         }
     };
     return name;
@@ -31,7 +31,7 @@ function getUserChoice(){
 
     //Making sure that the Player's choice is of a correct input
     while (choice !== "pierre" && choice !== "feuille" && choice !== "ciseaux"){
-    choice = prompt("Tu as paniqué ? Vérifie bien ton choix avant de valider.\nPierre, Feuille ou Ciseaux ?");
+        choice = prompt("Tu as paniqué ? Vérifie bien ton choix avant de valider.\nPierre, Feuille ou Ciseaux ?").toLowerCase();
     };
 return choice;
 }
@@ -42,13 +42,13 @@ function getCPUChoice(){
 
     //Turning CPU's choice into a string value
     if (randomChoice === 2){
-    randomChoice = "pierre";
+        randomChoice = "pierre";
     }
         else if (randomChoice === 1){
-        randomChoice = "feuille";
+            randomChoice = "feuille";
         }
     else {
-    randomChoice = "ciseaux";
+        randomChoice = "ciseaux";
     };
 return randomChoice;
 }
@@ -56,17 +56,27 @@ return randomChoice;
 function displayResult(){
     //Comparing choices and giving the results
     if (cpuChoice === userChoice){
-    alert("Egalité !\nPas de perdants,ni de gagnants.");
+        alert("Egalité !\nPas de perdants,ni de gagnants.");
     }
         else if ((cpuChoice === "feuille" && userChoice === "ciseaux") || (cpuChoice === "pierre" && userChoice === "feuille") || (cpuChoice === "ciseaux" && userChoice === "pierre")){
-        alert("Bien joué, tu as gagné " + userName);
-        scores["user"] += 1;
+            alert("Bien joué, tu as gagné " + userName);
+            scores["user"] += 1;
         }
     else {
-    alert("T'as perdu. T'es qu'une merde " + userName + " !");
-    scores["cpu"] += 1;
+        alert("T'as perdu. T'es qu'une merde " + userName + " !");
+        scores["cpu"] += 1;
 }
-return displayResult
+return displayResult;
+}
+
+function finalResult(){
+    if (scores["user"] === 3){
+        alert("Fatal error. Le programme s'est brusquement arrêté.\nTout les scores ont étés perdus, il n'y a donc aucun gagnant\nEn tout cas surement pas toi " + userName + " ...");
+    }
+    else if (scores["cpu"] === 3){
+        alert("Tu as perdu " + userName + " , ton contrat de travail se termine là.\nRetourne directement à la maison ne passe pas par la case RH");
+    }
+    return finalResult;
 }
 
 //Showing a welcome message
@@ -76,14 +86,17 @@ userName = getUserName();
 
 alert("Attention " + userName + " es tu sûr de vouloir te mesurer à moi ?");
 
-userChoice = getUserChoice();
+while (scores["user"] < 3 && scores["cpu"] < 3) {
 
-cpuChoice = getCPUChoice();
+    userChoice = getUserChoice();
 
-//Display CPU's choice
-alert("Hum, je choisis : " + cpuChoice);
+    cpuChoice = getCPUChoice();
 
-displayResult();
+    //Display CPU's choice
+    alert("Hum, je choisis : " + cpuChoice);
 
-//Displaying the current score
-alert("Le score est actuellement de :\n" + userName + " : " + scores["user"] + "\nOrdinateur : " + scores["cpu"]);
+    displayResult();
+    //Displaying the current score
+    alert("Le score est actuellement de :\n" + userName + " : " + scores["user"] + "\nOrdinateur : " + scores["cpu"]);
+}
+finalResult();
