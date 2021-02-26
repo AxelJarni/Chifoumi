@@ -4,6 +4,10 @@ alert("Bienvenue dans l'antre du Chifoumi, voulez vous jouer avec moi?");
 //Asking for player's name (userName)
 var userName = prompt("Quel est ton nom ?");
 
+while (userName.length < 2 || userName.length > 20){
+    userName = prompt("Calme toi, je veux juste un nom entre 2 et 20 caractères !");
+};
+
 //Taunting the player
 alert("Attention " + userName + " es tu sûr de vouloir te mesurer à moi ?");
 
@@ -23,6 +27,7 @@ else {
     cpuChoice = "ciseaux";
 };
 
+//Display CPU's choice
 alert("Hum, je choisis : " + cpuChoice);
 
 //Comparing choices and giving the results
