@@ -1,39 +1,57 @@
+//Few variables used
 var scores = {
     "user" : 0,
     "cpu" : 0
 };
 
+var choices = ["pierre", "feuille", "ciseaux"];
+
+//Few functions
+function getUserName(){
+    //Asking for player's name (userName)
+    var name = prompt("Quel est ton nom ?");
+
+    //Added userName length condition
+    while (name.length < 2 || name.length > 20){
+        //fix used when i had a loop problem on the >20 condtion. Delete "if" and "else if" conditions, if you want to use.
+            //userName = prompt("Calme toi, je veux juste un nom entre 2 et 20 caractères !");
+        if (name.length < 2){
+        name = prompt("C'est pas un nom ça, c'est une lettre.\nConcentre toi, fais un effort.");
+        }
+        else if (name.length > 20){
+        name = prompt("Je t'ai demandé un nom, pas un roman !\nT'as pas un petit surnom ?");
+        }
+    };
+    return name;
+}
+
+function getUserChoice(){
+    //Getting Player's choice
+    var choice = prompt("Fais ton choix :\nPierre, Feuille ou Ciseaux ?" ).toLowerCase();
+
+    //Making sure that the Player's choice is of a correct input
+    while (choice !== "pierre" && choice !== "feuille" && choice !== "ciseaux"){
+    choice = prompt("Tu as paniqué ? Vérifie bien ton choix avant de valider.\nPierre, Feuille ou Ciseaux ?");
+    };
+return choice;
+}
+
+
+
+
+
 //Showing a welcome message
 alert("Bienvenue dans l'antre du Chifoumi, veux-tu jouer avec moi?");
 
-//Asking for player's name (userName)
-var userName = prompt("Quel est ton nom ?");
-
-//Added userName length condition
-while (userName.length < 2 || userName.length > 20){
-    //fix used when i had a loop problem on the >20 condtion. Delete "if" and "else if", if you want to use.
-    //userName = prompt("Calme toi, je veux juste un nom entre 2 et 20 caractères !");
-    if (userName.length < 2){
-        userName = prompt("C'est pas un nom ça, c'est une lettre.\nConcentre toi, fais un effort.");
-    }
-    else if (userName.length > 20){
-        userName = prompt("Je t'ai demandé un nom, pas un roman !\nT'as pas un petit surnom ?");
-    }
-};
+userName = getUserName();
 
 //Taunting the player
 alert("Attention " + userName + " es tu sûr de vouloir te mesurer à moi ?");
 
-//Getting Player's choice
-var userChoice = prompt("Fais ton choix :\nPierre, Feuille ou Ciseaux ?" ).toLowerCase();
-
-//Making sure that the Player's choice is of a correct input
-while (userChoice !== "pierre" && userChoice !== "feuille" && userChoice !== "ciseaux"){
-    userChoice = prompt("Tu as paniqué ? Vérifie bien ton choix avant de valider.");
-};
+userChoice = getUserChoice();
 
 //Getting CPU's choice
-var cpuChoice = Math.floor(Math.random()*3);
+var cpuChoice = Math.floor(Math.random()*choices.length);
 
 //Turning CPU's choice into a string value
 if (cpuChoice === 2){
