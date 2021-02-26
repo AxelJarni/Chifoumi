@@ -1,3 +1,8 @@
+var scores = {
+    "user" : 0,
+    "cpu" : 0
+};
+
 //Showing a welcome message
 alert("Bienvenue dans l'antre du Chifoumi, veux-tu jouer avec moi?");
 
@@ -50,7 +55,12 @@ if (cpuChoice === userChoice){
 }
 else if ((cpuChoice === "feuille" && userChoice === "ciseaux") || (cpuChoice === "pierre" && userChoice === "feuille") || (cpuChoice === "ciseaux" && userChoice === "pierre")){
     alert("Bien joué, tu as gagné " + userName);
+    scores["user"] += 1;
 }
 else {
     alert("T'as perdu. T'es qu'une merde " + userName + " !");
+    scores["cpu"] += 1;
 }
+
+//Displaying the current score
+alert("Le score est actuellement de :\n" + userName + " : " + scores["user"] + "\nOrdinateur : " + scores["cpu"]);
