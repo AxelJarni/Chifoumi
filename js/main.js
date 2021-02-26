@@ -27,7 +27,7 @@ function getUserName(){
 
 function getUserChoice(){
     //Getting Player's choice
-    var choice = prompt("Fais ton choix :\nPierre, Feuille ou Ciseaux ?" ).toLowerCase();
+    var choice = prompt("Fais ton choix :\nPierre, Feuille ou Ciseaux ?").toLowerCase();
 
     //Making sure that the Player's choice is of a correct input
     while (choice !== "pierre" && choice !== "feuille" && choice !== "ciseaux"){
@@ -36,49 +36,54 @@ function getUserChoice(){
 return choice;
 }
 
+function getCPUChoice(){
+    //Getting CPU's choice
+    var randomChoice = Math.floor(Math.random()*choices.length);
 
+    //Turning CPU's choice into a string value
+    if (randomChoice === 2){
+    randomChoice = "pierre";
+    }
+        else if (randomChoice === 1){
+        randomChoice = "feuille";
+        }
+    else {
+    randomChoice = "ciseaux";
+    };
+return randomChoice;
+}
 
-
+function displayResult(){
+    //Comparing choices and giving the results
+    if (cpuChoice === userChoice){
+    alert("Egalité !\nPas de perdants,ni de gagnants.");
+    }
+        else if ((cpuChoice === "feuille" && userChoice === "ciseaux") || (cpuChoice === "pierre" && userChoice === "feuille") || (cpuChoice === "ciseaux" && userChoice === "pierre")){
+        alert("Bien joué, tu as gagné " + userName);
+        scores["user"] += 1;
+        }
+    else {
+    alert("T'as perdu. T'es qu'une merde " + userName + " !");
+    scores["cpu"] += 1;
+}
+return displayResult
+}
 
 //Showing a welcome message
 alert("Bienvenue dans l'antre du Chifoumi, veux-tu jouer avec moi?");
 
 userName = getUserName();
 
-//Taunting the player
 alert("Attention " + userName + " es tu sûr de vouloir te mesurer à moi ?");
 
 userChoice = getUserChoice();
 
-//Getting CPU's choice
-var cpuChoice = Math.floor(Math.random()*choices.length);
-
-//Turning CPU's choice into a string value
-if (cpuChoice === 2){
-    cpuChoice = "pierre";
-}
-    else if (cpuChoice === 1){
-    cpuChoice = "feuille";
-}
-else {
-    cpuChoice = "ciseaux";
-};
+cpuChoice = getCPUChoice();
 
 //Display CPU's choice
 alert("Hum, je choisis : " + cpuChoice);
 
-//Comparing choices and giving the results
-if (cpuChoice === userChoice){
-    alert("Egalité !\nPas de perdants,ni de gagnants.");
-}
-else if ((cpuChoice === "feuille" && userChoice === "ciseaux") || (cpuChoice === "pierre" && userChoice === "feuille") || (cpuChoice === "ciseaux" && userChoice === "pierre")){
-    alert("Bien joué, tu as gagné " + userName);
-    scores["user"] += 1;
-}
-else {
-    alert("T'as perdu. T'es qu'une merde " + userName + " !");
-    scores["cpu"] += 1;
-}
+displayResult();
 
 //Displaying the current score
 alert("Le score est actuellement de :\n" + userName + " : " + scores["user"] + "\nOrdinateur : " + scores["cpu"]);
