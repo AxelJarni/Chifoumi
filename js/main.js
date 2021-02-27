@@ -79,6 +79,14 @@ function finalResult(){
     return finalResult;
 }
 
+function replayGame(){
+    var reload = prompt("Veux-tu retenter ta chance ? Promis je serais plus cool cette fois !\nOui ou Non ?").toLowerCase;
+    if (reload === "oui") {
+        scores["user"] = 0;
+        scores["cpu"] = 0;
+    }
+}
+
 //Showing a welcome message
 alert("Bienvenue dans l'antre du Chifoumi, veux-tu jouer avec moi?");
 
@@ -98,5 +106,11 @@ while (scores["user"] < 3 && scores["cpu"] < 3) {
     displayResult();
     //Displaying the current score
     alert("Le score est actuellement de :\n" + userName + " : " + scores["user"] + "\nOrdinateur : " + scores["cpu"]);
+
+    if (scores["user"] === 3 || scores["cpu"] === 3){
+    finalResult();
+    replayGame();
+    }
 }
-finalResult();
+
+alert("A bientôt !");
