@@ -5,6 +5,7 @@ var scores = {
 };
 
 var choices = ["pierre", "feuille", "ciseaux"];
+var replay = true;
 
 //Few functions
 function getUserName(){
@@ -63,7 +64,7 @@ function displayResult(){
             scores["user"] += 1;
         }
     else {
-        alert("T'as perdu. T'es qu'une merde " + userName + " !");
+        alert("T'as perdu. Tes performances sont décevantes " + userName + "...");
         scores["cpu"] += 1;
 }
 return displayResult;
@@ -74,9 +75,21 @@ function finalResult(){
         alert("Fatal error. Le programme s'est brusquement arrêté.\nTout les scores ont étés perdus, il n'y a donc aucun gagnant\nEn tout cas surement pas toi " + userName + " ...");
     }
     else if (scores["cpu"] === 3){
-        alert("Tu as perdu " + userName + " , ton contrat de travail se termine là.\nRetourne directement à la maison ne passe pas par la case RH");
+        alert("Tu as perdu " + userName + ", ton contrat de travail se termine là.\nRetourne directement à la maison ne passe pas par la case RH");
     }
     return finalResult;
+}
+
+function replayGame(){
+    do {var reload = prompt("Veux-tu retenter ta chance ? Promis je serais plus cool cette fois !\nOui ou Non ?").toLowerCase();}
+    while (reload !== "oui" && reload !== "non")
+        if (reload === "oui") {
+        scores["user"] = 0;
+        scores["cpu"] = 0;
+        }
+        else if (reload === "non") {
+        replay = false;
+        }
 }
 
 //Showing a welcome message
@@ -86,7 +99,8 @@ userName = getUserName();
 
 alert("Attention " + userName + " es tu sûr de vouloir te mesurer à moi ?");
 
-while (scores["user"] < 3 && scores["cpu"] < 3) {
+//Game loop
+while (scores["user"] !== 3 && scores["cpu"] !== 3) {
 
     userChoice = getUserChoice();
 
@@ -98,5 +112,11 @@ while (scores["user"] < 3 && scores["cpu"] < 3) {
     displayResult();
     //Displaying the current score
     alert("Le score est actuellement de :\n" + userName + " : " + scores["user"] + "\nOrdinateur : " + scores["cpu"]);
+
+    if (scores["user"] >= 3 || scores["cpu"] >= 3){
+    finalResult();
+    replayGame();
+    }
 }
-finalResult();
+
+alert("A bientôt !");
